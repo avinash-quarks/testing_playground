@@ -17,7 +17,7 @@ test('Validate wait condition of stop spinners', async({loadDelay}) => {
     expect(await loadDelay.validateSpinnerVisibility()).toEqual('Thank God that spinner is gone!');
 })
 
-test.only('Validate State of Enable Button', async({loadDelay,page}) => {
+test('Validate State of Enable Button', async({loadDelay,page}) => {
 
     await loadDelay.navigateToWaitConditionPage();
     await loadDelay.clickToEnableBtn();
