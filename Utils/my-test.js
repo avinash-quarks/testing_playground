@@ -1,17 +1,39 @@
 const base = require('@playwright/test');
-const { AjaxData } = require('../Ajax_Data/AjaxData');
-const { LoadDelay } = require('../Page_Load/LoadDelay');
-const { Progress } = require('../Progress_Bar/Progress');
-const { OverlapElement } = require('../Overlapped_Element/OverLapElement');
-const { Button } = require('../Button/Button');
-const { ScrollBar } = require('../ScrollBar/ScrollBar');
-const { DynamicTable } = require('../Dynamic_Table/DynamicTable');
-const { Visibility } = require('../Visibility/Visibility');
-const { FileUpload } = require('../FileUpload/FileUpload');
+const { AjaxData } = require('../Pages/Ajax_Data/AjaxData');
+const { LoadDelay } = require('../Pages/Page_Load/LoadDelay');
+const { Progress } = require('../Pages/Progress_Bar/Progress');
+const { OverlapElement } = require('../Pages/Overlapped_Element/OverLapElement');
+const { Button } = require('../Pages/Button/Button');
+const { ScrollBar } = require('../Pages/ScrollBar/ScrollBar');
+const { DynamicTable } = require('../Pages/Dynamic_Table/DynamicTable');
+const { Visibility } = require('../Pages/Visibility/Visibility');
+const { FileUpload } = require('../Pages/FileUpload/FileUpload');
 
 
-// This new "test" can be used in multiple test files, and each of them will get the fixtures.
+const baseUrlsFixture = {
+  baseUrls: async ({}, use) => {
+    await use({
+      playground: 'http://uitestingplayground.com',
+      automationcamp: 'https://play1.automationcamp.ir',
+      // Add more as needed
+    });
+  },
+};
+
 exports.test = base.test.extend({
+  ...baseUrlsFixture,
+  page: async ({ page, baseUrls }, use) => {
+    // Add a method to navigate using a specific base URL
+    page.setBaseUrl = async (urlKey, path) => {
+      if (baseUrls[urlKey]) {
+        await page.goto(`${baseUrls[urlKey]}${path}`);
+      } else {
+        throw new Error(`Base URL for '${urlKey}' not found`);
+      }
+    };
+    await use(page);
+  },
+  
   ajaxPage: async ({ page }, use) => {
 
     const ajaxPage = new AjaxData(page);

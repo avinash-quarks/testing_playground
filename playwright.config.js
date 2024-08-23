@@ -22,22 +22,26 @@ export default defineConfig({
   workers: 1,
   // workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  reporter: [
+    ['html'],
+    // ['list'],
+    // ['allure-playwright']
+  ],
+
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     colorScheme: 'dark',
-    baseURL: 'http://uitestingplayground.com',
     screenshot: 'on',
-    video:'on-first-retry',
-    permissions:['geolocation'],
+    video: 'on-first-retry',
+    permissions: ['geolocation'],
     geolocation: { longitude: 12.492507, latitude: 41.889938 },
-    viewport : {width: 1920, height: 1440},
-    
+    viewport: { width: 1920, height: 1440 },
+
+    // Set a default base URL
+    baseURL: 'https://dev.guniguru.com',
+
     //launchOptions: { slowMo: 2000 },
   },
 
@@ -45,53 +49,61 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', 
-      testMatch: /.*\.setup\.js/ 
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.js/
     },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] ,
-    },
-      expect:{timeout:10*1000},
-      timeout:10*30000,
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+      expect: { timeout: 10 * 1000 },
+      timeout: 10 * 30000,
       dependencies: ['setup'],
-  
+
     },
     {
       name: 'chromiumnew',
-      use: { ...devices['Desktop Chrome'],
+      use: {
+        ...devices['Desktop Chrome'],
         // trace:"on",
         // headless: true,
-        viewport : {width: 1920, height: 1440},},
-        expect:{timeout:10*1000},
-        timeout:10*30000,
+        viewport: { width: 1920, height: 1440 },
+      },
+      expect: { timeout: 10 * 1000 },
+      timeout: 10 * 30000,
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'],
+      use: {
+        ...devices['Desktop Firefox'],
         // trace:"on",
         // headless: true,
-        viewport : {width: 1920, height: 1440},},
-        expect:{timeout:10*1000},
-        timeout:10*30000,
+        viewport: { width: 1920, height: 1440 },
+      },
+      expect: { timeout: 10 * 1000 },
+      timeout: 10 * 30000,
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'],
+      use: {
+        ...devices['Desktop Safari'],
         // trace:"on",
         // headless: true,
-        viewport : {width: 1920, height: 1440},},
-        expect:{timeout:10*1000},
-        timeout:10*30000,
+        viewport: { width: 1920, height: 1440 },
+      },
+      expect: { timeout: 10 * 1000 },
+      timeout: 10 * 30000,
     },
 
     /* Test against mobile viewports. */
-    {
-      name: 'MobileChrome',
-      use: { ...devices['Pixel 5'] },
-    },
+    // {
+    //   name: 'MobileChrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },

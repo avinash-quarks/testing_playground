@@ -10,5 +10,10 @@
   "devDependencies": {
     "@playwright/test": "^1.46.1",
     "@types/node": "^22.4.2"
+  },
+  "dependencies": {
+    "allure-playwright": "^3.0.0-beta.10",
+    "rimraf": "^6.0.1",
+    "testing_playground": "file:"
   }
 }

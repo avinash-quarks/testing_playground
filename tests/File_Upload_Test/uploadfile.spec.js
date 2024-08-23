@@ -1,4 +1,4 @@
-import { test, expect } from '../../Pages/Abstract_Component/my-test';
+import { test, expect } from '../../Utils/my-test';
 
 test('Upload File Using Drag & Drop Method', async({fileuploadPage,page})=>{
 

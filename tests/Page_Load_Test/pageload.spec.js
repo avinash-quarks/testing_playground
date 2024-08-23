@@ -1,4 +1,4 @@
-import { test, expect } from '../../Pages/Abstract_Component/my-test';
+import { test, expect } from '../../Utils/my-test';
 
 test('Wait for page loaded', async({loadDelay,page})=>{
 

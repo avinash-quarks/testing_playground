@@ -1,4 +1,4 @@
-import { test, expect } from '../../Pages/Abstract_Component/my-test';
+import { test, expect } from '../../Utils/my-test';
 
 test('Input Text in Overlapped Element', async({overlapElementPage,page})=>{
 

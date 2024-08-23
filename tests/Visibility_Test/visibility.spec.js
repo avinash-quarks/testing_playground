@@ -1,4 +1,4 @@
-import { test } from '../../Pages/Abstract_Component/my-test';
+import { test } from '../../Utils/my-test';
 
 test('Validate visibility of hidden button', async({visibilityPage,page})=>{
 
